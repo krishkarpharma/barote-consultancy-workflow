@@ -1,0 +1,23 @@
+{
+  "overview": "Barote Consultancy internal workflow management tool for managing Drug Licence, Food Licence/FSSAI, GST, MSME/Udyam, and other government licencing services. Features advanced plan layout generation, itemized billing and receipts, auto-generated forms, customizable reporting, portal credentials storage, and strong mobile/PWA support.",
+  "features": [
+    "Multi-service licence application management (Drug, Food, GST, MSME)",
+    "Advanced Plan Layout PDF generation with multi-room, entrance types, and dynamic scaling",
+    "Itemized billing with Fee Master and receipt generation",
+    "Monthly collection reports with PDF and Excel export",
+    "Auto-generated forms (Annexure DIR, FDA Covering Letters, Pharmacist Letters)",
+    "Portal credentials storage with show/hide toggle",
+    "PWA support with mobile-first responsive design",
+    "Government fees expense tracking with ledger export"
+  ],
+  "category": "business-tools",
+  "tags": [
+    "workflow",
+    "licence-management",
+    "billing",
+    "pdf-generation",
+    "pwa",
+    "admin-tool"
+  ],
+  "last_updated": "2026-05-03T17:18:29.028Z"
+}

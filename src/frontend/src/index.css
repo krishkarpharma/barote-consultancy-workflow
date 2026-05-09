@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Bricolage Grotesque", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: monospace;
+    --radius: 0.75rem;
+
+    --background: 0.985 0 0;
+    --foreground: 0.15 0 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0 0;
+
+    --primary: 0.55 0.16 262;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.92 0.06 260;
+    --secondary-foreground: 0.15 0 0;
+    --muted: 0.92 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    --accent: 0.65 0.19 47;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.88 0.03 260;
+    --input: 0.9 0.02 260;
+    --ring: 0.55 0.16 262;
+
+    --chart-1: 0.55 0.16 262;
+    --chart-2: 0.65 0.19 47;
+    --chart-3: 0.55 0.22 25;
+    --chart-4: 0.83 0.19 84;
+    --chart-5: 0.77 0.19 70;
+
+    --sidebar: 0.98 0.01 260;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.55 0.16 262;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.92 0.06 260;
+    --sidebar-accent-foreground: 0.15 0 0;
+    --sidebar-border: 0.88 0.03 260;
+    --sidebar-ring: 0.55 0.16 262;
+  }
+
+  .dark {
+    --background: 0.145 0 0;
+    --foreground: 0.95 0 0;
+    --card: 0.18 0 0;
+    --card-foreground: 0.95 0 0;
+    --popover: 0.22 0 0;
+    --popover-foreground: 0.95 0 0;
+
+    --primary: 0.68 0.18 262;
+    --primary-foreground: 0.145 0 0;
+
+    --secondary: 0.28 0.08 260;
+    --secondary-foreground: 0.85 0 0;
+    --muted: 0.22 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    --accent: 0.72 0.21 47;
+    --accent-foreground: 0.145 0 0;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.145 0 0;
+
+    --border: 0.28 0.04 260;
+    --input: 0.28 0.04 260;
+    --ring: 0.68 0.18 262;
+
+    --chart-1: 0.68 0.18 262;
+    --chart-2: 0.72 0.21 47;
+    --chart-3: 0.65 0.19 22;
+    --chart-4: 0.63 0.27 304;
+    --chart-5: 0.65 0.25 16;
+
+    --sidebar: 0.18 0.02 260;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.68 0.18 262;
+    --sidebar-primary-foreground: 0.145 0 0;
+    --sidebar-accent: 0.28 0.08 260;
+    --sidebar-accent-foreground: 0.85 0 0;
+    --sidebar-border: 0.28 0.04 260;
+    --sidebar-ring: 0.68 0.18 262;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Ensure form inputs meet mobile touch target size */
+  @media (max-width: 768px) {
+    input,
+    select,
+    textarea,
+    button {
+      min-height: 44px;
+    }
+  }
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(/assets/fonts/DMSans.woff2) format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url(/assets/fonts/BricolageGrotesque.woff2) format("woff2");
+  font-display: swap;
+}
+
+@layer utilities {
+  /* Mobile touch target compliance */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Responsive table wrapper */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .alert-urgent {
+    @apply border-l-4 border-destructive bg-destructive/5;
+  }
+
+  .alert-warning {
+    @apply border-l-4 border-accent bg-accent/5;
+  }
+
+  .card-elevated {
+    @apply bg-card border border-border shadow-sm;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium;
+  }
+
+  .status-pending {
+    @apply status-badge bg-accent/10 text-accent;
+  }
+
+  .status-completed {
+    @apply status-badge bg-primary/10 text-primary;
+  }
+
+  .status-in-progress {
+    @apply status-badge bg-secondary text-secondary-foreground;
+  }
+
+  .status-on-hold {
+    @apply status-badge bg-muted/30 text-muted-foreground;
+  }
+
+  .metric-card {
+    @apply bg-card border border-border rounded-lg p-4 transition-smooth;
+  }
+
+  .metric-label {
+    @apply text-xs font-medium text-muted-foreground uppercase tracking-wider;
+  }
+
+  .metric-value {
+    @apply text-3xl font-display font-bold text-foreground mt-2;
+  }
+
+  .sidebar-item {
+    @apply px-3 py-2 rounded-md text-sm transition-smooth;
+  }
+
+  .sidebar-item-active {
+    @apply sidebar-item bg-sidebar-primary text-sidebar-primary-foreground;
+  }
+
+  .sidebar-item-inactive {
+    @apply sidebar-item text-sidebar-foreground hover:bg-sidebar-accent;
+  }
+
+  .form-input {
+    @apply bg-input border border-input rounded-md px-3 py-2 text-sm text-foreground placeholder-muted-foreground transition-smooth focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+  }
+}

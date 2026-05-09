@@ -1,0 +1,400 @@
+// Version: 1.0.0
+type ActivityEntry__710958761 =
+  {action : Text; description : Text; id : Nat; timestamp : Int};
+type ApplicationPharmacist__723233621 =
+  {
+    aadhaarNumber : Text;
+    address : Text;
+    dateOfJoining : Text;
+    dateOfLeaving : Text;
+    fullName : Text;
+    id : Text;
+    mobileNumber : Text;
+    qualification : Text;
+    registrationNumber : Text;
+    resignationDate : Text
+  };
+type ApplicationStatus__289152660 =
+  {
+    #ApplicationFiled;
+    #Approved;
+    #Completed;
+    #DocumentsCollected;
+    #DocumentsPending;
+    #FeesPending;
+    #FeesReceived;
+    #New;
+    #OnHold;
+    #Rejected;
+    #UnderReview
+  };
+type Application__678882009 =
+  {
+    activityLog : [ActivityEntry__710958761];
+    alterationOldArea : ?Float;
+    alterationProposedArea : ?Float;
+    amountCollected : Nat;
+    amountPending : Nat;
+    applicationDate : Int;
+    applicationId : Text;
+    businessName : Text;
+    businessType : Text;
+    businessTypeData : ?BusinessTypeData__137988603;
+    changePremiseNewAddress : ?Text;
+    changePremiseOldAddress : ?Text;
+    createdAt : Int;
+    directLink : ?Text;
+    documents : [DocumentItem__401892529];
+    email : Text;
+    expectedCompletionDate : ?Int;
+    fdaAddress : Text;
+    firmAddress : Text;
+    firmId : Text;
+    firmPassword : ?Text;
+    id : Nat;
+    mobileNumber : Text;
+    notes : [NoteEntry__1051232921];
+    oldPharmacistName : Text;
+    oldPharmacistRegNo : Text;
+    oldPharmacistResignationDate : Text;
+    pharmacists : [ApplicationPharmacist__723233621];
+    planLayoutDetails : ?PlanLayoutDetails__822174114;
+    portalCredentials : [PortalCredential__541812195];
+    proprietorName : Text;
+    renewalDate : ?Int;
+    resignOldPharmacist : Bool;
+    selectedFeeTemplates : [Nat];
+    serviceType : ServiceType__564598879;
+    status : ApplicationStatus__289152660;
+    totalFees : Nat;
+    updatedAt : Int
+  };
+type BillLineItem__256498903 =
+  {amount : Float; description : Text; quantity : Nat};
+type BillStatus__963682632 = {#fullyPaid; #partiallyPaid; #unpaid};
+type Bill__505011139 =
+  {
+    applicationId : Nat;
+    balancePending : Float;
+    billNumber : Text;
+    createdAt : Int;
+    id : Nat;
+    lineItems : [BillLineItem__256498903];
+    paidAmount : Float;
+    paymentDate : Int;
+    paymentMode : PaymentMode__151529852;
+    paymentReceived : Float;
+    pendingAmount : Float;
+    status : BillStatus__963682632;
+    totalAmount : Float
+  };
+type BusinessTypeData__137988603 =
+  {
+    #llp : {designatedPartners : [PersonEntry__300513191]};
+    #ltd :
+      {
+        cin : Text;
+        directors : [PersonEntry__300513191];
+        registeredOfficeAddress : Text
+      };
+    #other :
+      {
+        authorizedPersonAadhaar : Text;
+        authorizedPersonAddress : Text;
+        authorizedPersonMobile : Text;
+        authorizedPersonName : Text;
+        authorizedPersonPan : Text;
+        otherDescription : Text
+      };
+    #partnership : {partners : [PersonEntry__300513191]};
+    #proprietary :
+      {
+        aadhaarNo : Text;
+        dateOfBirth : Text;
+        panNo : Text;
+        proprietorAddress : Text;
+        proprietorEmail : Text;
+        proprietorMobile : Text;
+        proprietorName : Text
+      };
+    #pvtLtd :
+      {
+        cin : Text;
+        directors : [PersonEntry__300513191];
+        registeredOfficeAddress : Text
+      };
+    #society :
+      {
+        registrationNo : Text;
+        societyName : Text;
+        trustees : [TrusteeEntry__20652595]
+      };
+    #trust :
+      {
+        registrationNo : Text;
+        trustName : Text;
+        trustees : [TrusteeEntry__20652595]
+      }
+  };
+type CompanyInfo__439541093 =
+  {
+    address : Text;
+    email : Text;
+    fdaAddress : Text;
+    name : Text;
+    phone : Text
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DocumentItem__401892529 =
+  {
+    category : Text;
+    checkedAt : ?Int;
+    id : Nat;
+    isChecked : Bool;
+    name : Text
+  };
+type Expense__534625882 =
+  {
+    amount : Float;
+    applicationId : Text;
+    category : Text;
+    createdAt : Int;
+    description : Text;
+    expenseDate : Int;
+    id : Text;
+    notes : ?Text;
+    paymentMode : PaymentMode__151529852;
+    referenceNo : ?Text
+  };
+type FdaOfficeDetails__504058291 =
+  {address : Text; contact : Text; officeName : Text; officerName : Text};
+type FeeItem__646585245 =
+  {
+    category : Text;
+    createdAt : Int;
+    defaultAmount : Float;
+    description : ?Text;
+    id : Text;
+    name : Text
+  };
+type FeeTemplate__1002141669 =
+  {
+    amount : Nat;
+    description : Text;
+    id : Nat;
+    name : Text;
+    serviceType : ?ServiceType__564598879
+  };
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NoteEntry__1051232921 = {createdAt : Int; id : Nat; text : Text};
+type PaymentMode__151529852 =
+  {#BankTransfer; #Card; #Cash; #Cheque; #Other; #UPI};
+type PersonEntry__300513191 =
+  {
+    aadhaarNo : Text;
+    address : Text;
+    dateOfBirth : Text;
+    din : Text;
+    email : Text;
+    id : Text;
+    mobile : Text;
+    name : Text;
+    panNo : Text
+  };
+type PharmacistDetails__609495929 =
+  {
+    address : Text;
+    contact : Text;
+    name : Text;
+    qualification : Text;
+    registrationNumber : Text
+  };
+type PlanLayoutDetails__822174114 =
+  {
+    boundaryEast : Text;
+    boundaryNorth : Text;
+    boundarySouth : Text;
+    boundaryWest : Text;
+    frontOfShop : Text;
+    premisesLength : Float;
+    premisesWidth : Float;
+    rooms : [RoomDetail__741273780]
+  };
+type PortalCredential__541812195 =
+  {
+    directLink : Text;
+    id : Text;
+    password : Text;
+    portalName : Text;
+    userId : Text
+  };
+type Receipt__41459614 =
+  {
+    amountReceived : Float;
+    applicationId : Text;
+    billId : Text;
+    createdAt : Int;
+    firmId : Text;
+    firmName : Text;
+    id : Text;
+    paymentMode : PaymentMode__151529852;
+    receiptDate : Int;
+    receiptNumber : Text;
+    referenceNo : ?Text;
+    remarks : ?Text
+  };
+type Role__931309261 = {#Admin; #Manager; #Staff};
+type RoomDetail__741273780 =
+  {
+    entranceSide : ?Text;
+    entranceType : Text;
+    length : Float;
+    roomName : ?Text;
+    whichSide : ?Text;
+    width : Float
+  };
+type ServiceCharge__572885852 =
+  {
+    amount : Float;
+    description : Text;
+    id : Nat;
+    serviceType : ServiceType__564598879
+  };
+type ServiceType__564598879 =
+  {
+    #DrugLicenceAddPharmacist;
+    #DrugLicenceAlterationOfPremise;
+    #DrugLicenceChangeConstitution;
+    #DrugLicenceChangePremise;
+    #DrugLicenceNewFirm;
+    #DrugLicenceRemovePharmacist;
+    #DrugLicenceRenewal;
+    #FoodLicenceNew;
+    #FoodLicenceRenewal;
+    #GSTRegistration;
+    #MSMEUdyam;
+    #Other
+  };
+type SessionData__547549588 =
+  {expiresAt : Int; role : Role__931309261; userId : Nat};
+type TrusteeEntry__20652595 =
+  {
+    aadhaarNo : Text;
+    address : Text;
+    email : Text;
+    id : Text;
+    mobile : Text;
+    name : Text;
+    panNo : Text
+  };
+type User__831686142 =
+  {
+    createdAt : Int;
+    displayName : Text;
+    id : Nat;
+    isActive : Bool;
+    passwordHash : Text;
+    role : Role__931309261;
+    username : Text
+  };
+actor {
+  stable SESSION_TTL : Int;
+  stable var _companyInfoVal :
+    {
+      address : Text;
+      email : Text;
+      fdaAddress : Text;
+      name : Text;
+      phone : Text
+    };
+  stable appYearCounter :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?(Nat, Nat)]];
+      var elementIndex : Nat__490723111
+    };
+  stable applications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Application__678882009]];
+      var elementIndex : Nat__490723111
+    };
+  stable billYearCounter :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?(Nat, Nat)]];
+      var elementIndex : Nat__490723111
+    };
+  stable bills :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Bill__505011139]];
+      var elementIndex : Nat__490723111
+    };
+  stable companyInfo : {var value : CompanyInfo__439541093};
+  stable expenses :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Expense__534625882]];
+      var elementIndex : Nat__490723111
+    };
+  stable fdaOfficeStore : {var value : ?FdaOfficeDetails__504058291};
+  stable feeItems :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FeeItem__646585245]];
+      var elementIndex : Nat__490723111
+    };
+  stable feeTemplates :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FeeTemplate__1002141669]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextAppId : {var value : Nat};
+  stable nextBillId : {var value : Nat};
+  stable nextDocId : {var value : Nat};
+  stable nextExpenseSeq : {var value : Nat};
+  stable nextFeeTemplateId : {var value : Nat};
+  stable nextNoteId : {var value : Nat};
+  stable nextReceiptSeq : {var value : Nat};
+  stable nextServiceChargeId : {var value : Nat};
+  stable var nextUserId : Nat;
+  stable pharmacistStore : {var value : ?PharmacistDetails__609495929};
+  stable rcptYearCounter :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?(Nat, Nat)]];
+      var elementIndex : Nat__490723111
+    };
+  stable receipts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Receipt__41459614]];
+      var elementIndex : Nat__490723111
+    };
+  stable serviceCharges :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ServiceCharge__572885852]];
+      var elementIndex : Nat__490723111
+    };
+  stable sessions :
+    {
+      var root : Node__46230540<Text, SessionData__547549588>;
+      var size : Nat__490723111
+    };
+  stable users :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?User__831686142]];
+      var elementIndex : Nat__490723111
+    }
+};

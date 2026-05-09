@@ -1,0 +1,713 @@
+type UserUpdate = 
+ record {
+   displayName: opt text;
+   isActive: opt bool;
+   role: opt Role;
+ };
+type UserPublic = 
+ record {
+   displayName: text;
+   id: nat;
+   isActive: bool;
+   role: Role;
+   username: text;
+ };
+type UpdateDocumentInput = 
+ record {
+   applicationId: nat;
+   documentId: nat;
+   isChecked: bool;
+ };
+type UpdateApplicationInput = 
+ record {
+   alterationOldArea: opt float64;
+   alterationProposedArea: opt float64;
+   amountCollected: opt nat;
+   applicationDate: opt int;
+   businessName: opt text;
+   businessType: opt text;
+   businessTypeData: opt BusinessTypeData;
+   changePremiseNewAddress: opt text;
+   changePremiseOldAddress: opt text;
+   directLink: opt text;
+   email: opt text;
+   expectedCompletionDate: opt int;
+   fdaAddress: opt text;
+   firmAddress: opt text;
+   firmId: opt text;
+   firmPassword: opt text;
+   id: nat;
+   mobileNumber: opt text;
+   oldPharmacistName: opt text;
+   oldPharmacistRegNo: opt text;
+   oldPharmacistResignationDate: opt text;
+   proprietorName: opt text;
+   renewalDate: opt int;
+   resignOldPharmacist: opt bool;
+   selectedFeeTemplates: opt vec nat;
+   serviceType: opt ServiceType;
+   status: opt ApplicationStatus;
+   totalFees: opt nat;
+ };
+type TrusteeEntry = 
+ record {
+   aadhaarNo: text;
+   address: text;
+   email: text;
+   id: text;
+   mobile: text;
+   name: text;
+   panNo: text;
+ };
+type SessionData = 
+ record {
+   expiresAt: int;
+   role: Role;
+   userId: nat;
+ };
+type ServiceTypeCount = 
+ record {
+   count: nat;
+   serviceType: ServiceType;
+ };
+type ServiceType = 
+ variant {
+   DrugLicenceAddPharmacist;
+   DrugLicenceAlterationOfPremise;
+   DrugLicenceChangeConstitution;
+   DrugLicenceChangePremise;
+   DrugLicenceNewFirm;
+   DrugLicenceRemovePharmacist;
+   DrugLicenceRenewal;
+   FoodLicenceNew;
+   FoodLicenceRenewal;
+   GSTRegistration;
+   MSMEUdyam;
+   Other;
+ };
+type ServiceCharge = 
+ record {
+   amount: float64;
+   description: text;
+   id: nat;
+   serviceType: ServiceType;
+ };
+type SearchFilter = 
+ record {
+   dateFrom: opt int;
+   dateTo: opt int;
+   searchText: text;
+   serviceType: opt ServiceType;
+   status: opt ApplicationStatus;
+ };
+type RoomDetail = 
+ record {
+   entranceSide: opt text;
+   entranceType: text;
+   length: float64;
+   roomName: opt text;
+   whichSide: opt text;
+   width: float64;
+ };
+type Role = 
+ variant {
+   Admin;
+   Manager;
+   Staff;
+ };
+type ReportFilter = 
+ record {
+   dateFrom: opt int;
+   dateTo: opt int;
+   renewalDaysAhead: opt nat;
+   serviceType: opt ServiceType;
+   status: opt ApplicationStatus;
+ };
+type RenewalReport = record {applications: vec AppSummary;};
+type Receipt = 
+ record {
+   amountReceived: float64;
+   applicationId: text;
+   billId: text;
+   createdAt: int;
+   firmId: text;
+   firmName: text;
+   id: text;
+   paymentMode: PaymentMode;
+   receiptDate: int;
+   receiptNumber: text;
+   referenceNo: opt text;
+   remarks: opt text;
+ };
+type PortalCredential = 
+ record {
+   directLink: text;
+   id: text;
+   password: text;
+   portalName: text;
+   userId: text;
+ };
+type PlanLayoutDetails = 
+ record {
+   boundaryEast: text;
+   boundaryNorth: text;
+   boundarySouth: text;
+   boundaryWest: text;
+   frontOfShop: text;
+   premisesLength: float64;
+   premisesWidth: float64;
+   rooms: vec RoomDetail;
+ };
+type PharmacistDetails = 
+ record {
+   address: text;
+   contact: text;
+   name: text;
+   qualification: text;
+   registrationNumber: text;
+ };
+type PersonEntry = 
+ record {
+   aadhaarNo: text;
+   address: text;
+   dateOfBirth: text;
+   din: text;
+   email: text;
+   id: text;
+   mobile: text;
+   name: text;
+   panNo: text;
+ };
+type PaymentMode = 
+ variant {
+   BankTransfer;
+   Card;
+   Cash;
+   Cheque;
+   Other;
+   UPI;
+ };
+type NoteEntry = 
+ record {
+   createdAt: int;
+   id: nat;
+   "text": text;
+ };
+type LoginResult = 
+ record {
+   sessionToken: text;
+   user: UserPublic;
+ };
+type LedgerEntry = 
+ record {
+   applicationId: text;
+   credit: float64;
+   date: int;
+   debit: float64;
+   description: text;
+   reference: text;
+   transactionType: text;
+ };
+type FeesReport = 
+ record {
+   applications: vec AppSummary;
+   totalBilled: nat;
+   totalCollected: nat;
+   totalPending: nat;
+ };
+type FeeTemplate = 
+ record {
+   amount: nat;
+   description: text;
+   id: nat;
+   name: text;
+   serviceType: opt ServiceType;
+ };
+type FeeItem = 
+ record {
+   category: text;
+   createdAt: int;
+   defaultAmount: float64;
+   description: opt text;
+   id: text;
+   name: text;
+ };
+type FdaOfficeDetails = 
+ record {
+   address: text;
+   contact: text;
+   officeName: text;
+   officerName: text;
+ };
+type Expense = 
+ record {
+   amount: float64;
+   applicationId: text;
+   category: text;
+   createdAt: int;
+   description: text;
+   expenseDate: int;
+   id: text;
+   notes: opt text;
+   paymentMode: PaymentMode;
+   referenceNo: opt text;
+ };
+type DocumentItem = 
+ record {
+   category: text;
+   checkedAt: opt int;
+   id: nat;
+   isChecked: bool;
+   name: text;
+ };
+type DashboardStats = 
+ record {
+   completed: nat;
+   documentsPendingCount: nat;
+   feesPendingCount: nat;
+   inProgress: nat;
+   onHold: nat;
+   pending: nat;
+   pendingFeesTotal: nat;
+   recentActivity: vec ActivityEntry;
+   serviceTypeStats: vec ServiceTypeCount;
+   submitted: nat;
+   totalApplications: nat;
+   upcomingDeadlines: vec AppSummary;
+ };
+type CreateApplicationInput = 
+ record {
+   amountCollected: nat;
+   applicationDate: int;
+   businessName: text;
+   businessType: text;
+   businessTypeData: opt BusinessTypeData;
+   email: text;
+   expectedCompletionDate: opt int;
+   fdaAddress: text;
+   firmAddress: text;
+   firmId: text;
+   mobileNumber: text;
+   proprietorName: text;
+   renewalDate: opt int;
+   selectedFeeTemplates: vec nat;
+   serviceType: ServiceType;
+   status: ApplicationStatus;
+   totalFees: nat;
+ };
+type CompanyInfo = 
+ record {
+   address: text;
+   email: text;
+   fdaAddress: text;
+   name: text;
+   phone: text;
+ };
+type BusinessTypeData = 
+ variant {
+   llp: record {designatedPartners: vec PersonEntry;};
+   ltd:
+    record {
+      cin: text;
+      directors: vec PersonEntry;
+      registeredOfficeAddress: text;
+    };
+   other:
+    record {
+      authorizedPersonAadhaar: text;
+      authorizedPersonAddress: text;
+      authorizedPersonMobile: text;
+      authorizedPersonName: text;
+      authorizedPersonPan: text;
+      otherDescription: text;
+    };
+   partnership: record {partners: vec PersonEntry;};
+   proprietary:
+    record {
+      aadhaarNo: text;
+      dateOfBirth: text;
+      panNo: text;
+      proprietorAddress: text;
+      proprietorEmail: text;
+      proprietorMobile: text;
+      proprietorName: text;
+    };
+   pvtLtd:
+    record {
+      cin: text;
+      directors: vec PersonEntry;
+      registeredOfficeAddress: text;
+    };
+   society:
+    record {
+      registrationNo: text;
+      societyName: text;
+      trustees: vec TrusteeEntry;
+    };
+   trust:
+    record {
+      registrationNo: text;
+      trustName: text;
+      trustees: vec TrusteeEntry;
+    };
+ };
+type BillStatus = 
+ variant {
+   fullyPaid;
+   partiallyPaid;
+   unpaid;
+ };
+type BillLineItem = 
+ record {
+   amount: float64;
+   description: text;
+   quantity: nat;
+ };
+type Bill = 
+ record {
+   applicationId: nat;
+   balancePending: float64;
+   billNumber: text;
+   createdAt: int;
+   id: nat;
+   lineItems: vec BillLineItem;
+   paidAmount: float64;
+   paymentDate: int;
+   paymentMode: PaymentMode;
+   paymentReceived: float64;
+   pendingAmount: float64;
+   status: BillStatus;
+   totalAmount: float64;
+ };
+type ApplicationStatus = 
+ variant {
+   ApplicationFiled;
+   Approved;
+   Completed;
+   DocumentsCollected;
+   DocumentsPending;
+   FeesPending;
+   FeesReceived;
+   New;
+   OnHold;
+   Rejected;
+   UnderReview;
+ };
+type ApplicationPharmacist = 
+ record {
+   aadhaarNumber: text;
+   address: text;
+   dateOfJoining: text;
+   dateOfLeaving: text;
+   fullName: text;
+   id: text;
+   mobileNumber: text;
+   qualification: text;
+   registrationNumber: text;
+   resignationDate: text;
+ };
+type ApplicationFilters = 
+ record {
+   dateFrom: opt int;
+   dateTo: opt int;
+   serviceType: opt ServiceType;
+   status: opt ApplicationStatus;
+ };
+type Application = 
+ record {
+   activityLog: vec ActivityEntry;
+   alterationOldArea: opt float64;
+   alterationProposedArea: opt float64;
+   amountCollected: nat;
+   amountPending: nat;
+   applicationDate: int;
+   applicationId: text;
+   businessName: text;
+   businessType: text;
+   businessTypeData: opt BusinessTypeData;
+   changePremiseNewAddress: opt text;
+   changePremiseOldAddress: opt text;
+   createdAt: int;
+   directLink: opt text;
+   documents: vec DocumentItem;
+   email: text;
+   expectedCompletionDate: opt int;
+   fdaAddress: text;
+   firmAddress: text;
+   firmId: text;
+   firmPassword: opt text;
+   id: nat;
+   mobileNumber: text;
+   notes: vec NoteEntry;
+   oldPharmacistName: text;
+   oldPharmacistRegNo: text;
+   oldPharmacistResignationDate: text;
+   pharmacists: vec ApplicationPharmacist;
+   planLayoutDetails: opt PlanLayoutDetails;
+   portalCredentials: vec PortalCredential;
+   proprietorName: text;
+   renewalDate: opt int;
+   resignOldPharmacist: bool;
+   selectedFeeTemplates: vec nat;
+   serviceType: ServiceType;
+   status: ApplicationStatus;
+   totalFees: nat;
+   updatedAt: int;
+ };
+type AppSummary = 
+ record {
+   amountPending: nat;
+   applicationId: text;
+   businessName: text;
+   expectedCompletionDate: opt int;
+   firmId: text;
+   id: nat;
+   proprietorName: text;
+   renewalDate: opt int;
+   serviceType: ServiceType;
+   status: ApplicationStatus;
+   updatedAt: int;
+ };
+type ActivityEntry = 
+ record {
+   action: text;
+   description: text;
+   id: nat;
+   timestamp: int;
+ };
+service : {
+  addApplicationPharmacist: (appId: nat, pharmacist:
+   ApplicationPharmacist) -> (variant {
+                                err: text;
+                                ok: Application;
+                              });
+  addCustomDocumentItem: (applicationId: nat, name: text, category: text) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  addNote: (applicationId: nat, noteText: text) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  addPortalCredential: (appId: nat, credential: PortalCredential) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  /// Change a user's password. Admin can change any; future: self-change support.
+  changePassword: (token: text, userId: nat, newPasswordHash: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  createApplication: (input: CreateApplicationInput) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  createBill: (token: text, applicationId: nat, lineItems: vec BillLineItem,
+   paymentReceived: float64, paymentMode: PaymentMode, paymentDate: int) ->
+   (variant {
+      err: text;
+      ok: Bill;
+    });
+  createExpense: (token: text, applicationId: text, expenseDate: int,
+   description: text, category: text, amount: float64, paymentMode:
+   PaymentMode, referenceNo: opt text, notes: opt text) ->
+   (variant {
+      err: text;
+      ok: Expense;
+    });
+  createFeeItem: (token: text, name: text, description: opt text,
+   defaultAmount: float64, category: text) ->
+   (variant {
+      err: text;
+      ok: FeeItem;
+    });
+  createFeeTemplate: (name: text, serviceType: opt ServiceType, amount: 
+   nat, description: text) -> (FeeTemplate);
+  createReceipt: (token: text, billId: text, applicationId: text, firmName:
+   text, firmId: text, receiptDate: int, amountReceived: float64,
+   paymentMode: PaymentMode, referenceNo: opt text, remarks: opt text) ->
+   (variant {
+      err: text;
+      ok: Receipt;
+    });
+  createServiceCharge: (token: text, serviceType: ServiceType, description:
+   text, amount: float64) -> (variant {
+                                err: text;
+                                ok: ServiceCharge;
+                              });
+  /// Create a new user. Requires Admin session.
+  createUser: (token: text, username: text, passwordHash: text, role: 
+   Role, displayName: text) -> (variant {
+                                  err: text;
+                                  ok: UserPublic;
+                                });
+  deleteApplication: (id: nat) -> (variant {
+                                     err: text;
+                                     ok;
+                                   });
+  deleteFeeItem: (token: text, id: text) -> (variant {
+                                               err: text;
+                                               ok;
+                                             });
+  deleteFeeTemplate: (id: nat) -> (bool);
+  deleteServiceCharge: (token: text, id: nat) -> (variant {
+                                                    err: text;
+                                                    ok;
+                                                  });
+  /// Delete a user. Requires Admin session. Cannot delete yourself.
+  deleteUser: (token: text, userId: nat) -> (variant {
+                                               err: text;
+                                               ok;
+                                             });
+  getApplication: (id: nat) -> (opt Application) query;
+  getApplicationLedger: (applicationId: text, appIdNat: nat) ->
+   (vec LedgerEntry) query;
+  getApplicationPharmacists: (appId: nat) ->
+   (variant {
+      err: text;
+      ok: vec ApplicationPharmacist;
+    }) query;
+  getApplicationPlanLayout: (appId: nat) ->
+   (variant {
+      err: text;
+      ok: opt PlanLayoutDetails;
+    }) query;
+  getApplicationStatusReport: (filter: ReportFilter) ->
+   (vec AppSummary) query;
+  getApplicationsForReport: (filter: ReportFilter) -> (vec AppSummary) query;
+  getBill: (id: nat) -> (opt Bill) query;
+  getBillsByApplication: (applicationId: nat) -> (vec Bill) query;
+  getCompanyInfo: () -> (CompanyInfo) query;
+  getDashboardStats: () -> (DashboardStats) query;
+  getExpensesByApplication: (applicationId: text) -> (vec Expense) query;
+  getFdaOfficeDetails: () -> (opt FdaOfficeDetails) query;
+  getFeesCollectionReport: (filter: ReportFilter) -> (FeesReport) query;
+  getFeesReport: (filter: ReportFilter) -> (FeesReport) query;
+  getMonthlyCollection: (year: nat, month: nat) -> (vec Receipt) query;
+  getPharmacistDetails: () -> (opt PharmacistDetails) query;
+  getPortalCredentials: (appId: nat) ->
+   (variant {
+      err: text;
+      ok: vec PortalCredential;
+    }) query;
+  getReceiptsByApplication: (applicationId: text) -> (vec Receipt) query;
+  getReceiptsByBill: (billId: text) -> (vec Receipt) query;
+  getRenewalReminders: (days: nat) -> (vec AppSummary) query;
+  getRenewalRemindersReport: (daysAhead: nat) -> (RenewalReport) query;
+  getServiceChargesByServiceType: (serviceType: ServiceType) ->
+   (vec ServiceCharge) query;
+  /// Returns true when no users have been created yet (first-run setup).
+  isFirstRun: () -> (bool) query;
+  listApplications: (filters: ApplicationFilters) -> (vec AppSummary) query;
+  listFeeItems: () -> (vec FeeItem) query;
+  listFeeTemplates: () -> (vec FeeTemplate) query;
+  listServiceCharges: () -> (vec ServiceCharge) query;
+  /// List all users. Requires Admin session.
+  listUsers: (token: text) -> (variant {
+                                 err: text;
+                                 ok: vec UserPublic;
+                               });
+  /// Authenticate with username + passwordHash. Returns a session token valid for 24h.
+  login: (username: text, passwordHash: text) ->
+   (variant {
+      err: text;
+      ok: LoginResult;
+    });
+  /// Invalidate a session.
+  logout: (token: text) -> ();
+  removeApplicationPharmacist: (appId: nat, pharmacistId: text) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  removeCustomDocumentItem: (applicationId: nat, documentId: nat) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  removePortalCredential: (appId: nat, credentialId: text) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  /// Recovery endpoint — resets credentials to username='admin' / password='12345' (SHA-256).
+  /// No token required: intended for admins who have lost access.
+  /// Also clears all active sessions.
+  resetAdminCredentials: () -> (variant {
+                                  err: text;
+                                  ok: UserPublic;
+                                });
+  searchApplications: (filter: SearchFilter) -> (vec AppSummary) query;
+  setApplicationPlanLayout: (appId: nat, details: PlanLayoutDetails) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  setCompanyInfo: (info: CompanyInfo) -> ();
+  setFdaOfficeDetails: (token: text, details: FdaOfficeDetails) -> ();
+  setPharmacistDetails: (token: text, details: PharmacistDetails) -> ();
+  /// Create the first Admin account. Fails if any user already exists.
+  setupAdmin: (username: text, passwordHash: text, displayName: text) ->
+   (variant {
+      err: text;
+      ok: UserPublic;
+    });
+  updateApplication: (input: UpdateApplicationInput) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  updateApplicationPharmacist: (appId: nat, pharmacistId: text, pharmacist:
+   ApplicationPharmacist) -> (variant {
+                                err: text;
+                                ok: Application;
+                              });
+  updateBillFromReceipt: (token: text, billId: nat) ->
+   (variant {
+      err: text;
+      ok: Bill;
+    });
+  updateDocumentItem: (input: UpdateDocumentInput) ->
+   (variant {
+      err: text;
+      ok: Application;
+    });
+  updateFeeItem: (token: text, id: text, name: opt text, description:
+   opt opt text, defaultAmount: opt float64, category: opt text) ->
+   (variant {
+      err: text;
+      ok: FeeItem;
+    });
+  updateFeeTemplate: (id: nat, name: opt text, serviceType:
+   opt opt ServiceType, amount: opt nat, description: opt text) ->
+   (opt FeeTemplate);
+  updatePortalCredential: (appId: nat, credentialId: text, credential:
+   PortalCredential) -> (variant {
+                           err: text;
+                           ok: Application;
+                         });
+  updatePortalCredentials: (appId: text, credentials:
+   vec PortalCredential) -> (variant {
+                               err: text;
+                               ok: Application;
+                             });
+  updateServiceCharge: (token: text, id: nat, serviceType: opt ServiceType,
+   description: opt text, amount: opt float64) ->
+   (variant {
+      err: text;
+      ok: ServiceCharge;
+    });
+  /// Update a user's display name, role, or active status. Requires Admin session.
+  updateUser: (token: text, userId: nat, updates: UserUpdate) ->
+   (variant {
+      err: text;
+      ok: UserPublic;
+    });
+  /// Validate an existing session token. Returns null if expired/not found.
+  validateSession: (token: text) -> (opt SessionData) query;
+}
